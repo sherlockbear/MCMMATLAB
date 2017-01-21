@@ -1,4 +1,5 @@
-clear,clc
+clear all
+clc
 
 len=100;
 L=3;
@@ -7,42 +8,34 @@ celength=4;
 cewidth=3;
 CELEN=len/celength;
 r=0.5;
+Vmax=7;
+arrival=0;
+Time=3000;
 
 step=0.1;
 draw_line;
 draw_road;
 
-clf
-imh = image(cat(3,1-plaza,1-plaza,1-plaza));
-axis equal
-axis tight
-axis off
-
-vel=0;
+initvel=0;
 acc=1;
 deacc=acc;
 initcarflow;
 
+clf
+imh = image(cat(3,1-carmap-plaza,1-carmap-plaza,1-plaza));
+axis equal
+axis tight
+axis off
 
-
-
- 
-% burning -> empty
-% green -> burning if one neigbor burning or with prob=f (lightning)
-% empty -> green with prob=p (growth)
-% veg = {empty=0 burning=1 green=2}
-for i=1:300000
-    %nearby fires?
+tic
+for t=1:Time
+    refresh_vel_mer
+    move_forward
     
-     sum = (veg(1:n,[n 1:n-1])==1) + (veg(1:n,[2:n 1])==1) + ...
-           (veg([n 1:n-1], 1:n)==1) + (veg([2:n 1],1:n)==1) ;
- 
-    veg = ...
-         2*(veg==2) - ((veg==2) & (sum>0 | (rand(n,n)<Plightning))) + ...
-         2*((veg==0) & rand(n,n)<Pgrowth) ;
-     
-    set(imh, 'cdata', cat(3,(veg==1),(veg==2),z) )
+    set(imh, 'cdata', cat(3,1-carmap*0.4-plaza*0.4,1-carmap-plaza,1-plaza))
     drawnow
 end
+toc
+
 
 
