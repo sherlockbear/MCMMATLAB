@@ -6,12 +6,11 @@ roadtop=mod(road,area);
 road=(road-roadtop)/area+L;
 roadtop=ceil((roadtop/area)*10)/10;
 
-celen=len/celength;
-plaza=ones(B,celen);
-z=zeros(B,celen);
-for i=1:celen
+plaza=ones(B,CELEN);
+for i=1:CELEN
     plaza(road(i)+1,i)=roadtop(i);
     plaza(road(i)+2:B,i)=0;
 end
+plaza=1-plaza;
 
-clear n area
+clear n area i road roadtop

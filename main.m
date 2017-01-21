@@ -5,6 +5,7 @@ L=3;
 B=8;
 celength=4;
 cewidth=3;
+CELEN=len/celength;
 r=0.5;
 
 step=0.1;
@@ -12,10 +13,18 @@ draw_line;
 draw_road;
 
 clf
-imh = image(cat(3,plaza,plaza,plaza));
+imh = image(cat(3,1-plaza,1-plaza,1-plaza));
 axis equal
 axis tight
 axis off
+
+vel=0;
+acc=1;
+deacc=acc;
+initcarflow;
+
+
+
 
  
 % burning -> empty
