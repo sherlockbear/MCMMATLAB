@@ -19,8 +19,12 @@ for j=1:CELEN
         
     end
 end
-newcar=(rand(1,B)<0.8)';
+
+newcar=(rand(1,B)<flowden)';
+newcarvel=(newcar-newcarmap(:,1))*initvel;
 newcarmap=[newcar|newcarmap(:,1) newcarmap(:,2:end)];
+newcarvelmap=[newcar+newcarvelmap(:,1) newcarvelmap(:,2:end)];
 carmap=newcarmap;
 carvelmap=newcarvelmap;
 carmermap(:,:)=0;
+

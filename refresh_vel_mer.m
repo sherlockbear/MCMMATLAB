@@ -4,9 +4,9 @@ for j=1:CELEN
             continue
         end
         frontline=j+1:1:min(CELEN,j+carvelmap(i,j)+1);
-        G=min([min(find(carmap(i,frontline)==1)),min(find(plaza(i,frontline)==1))]);
+        G=min([min(find(carmap(i,frontline)==1)),min(find(plaza(i,frontline)>0.8))]);
         if i~=1&&sum(carmap(i-1,frontline-1))==0%&&carvelmap(i,j)~=0
-            Gl=min([min(find(carmap(i-1,frontline-1)==1)),min(find(plaza(i-1,frontline-1)==1))]);
+            Gl=min([min(find(carmap(i-1,frontline-1)==1)),min(find(plaza(i-1,frontline-1)>0.8))]);
             if G
                p=0.9;%(1-0.9*exp(1-Gl/G))*(0.5+0.5*plaza(i,min(CELEN,j+carvelmap(i,j))));
             else
